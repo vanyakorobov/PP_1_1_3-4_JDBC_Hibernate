@@ -19,10 +19,10 @@ public class Main {
         for (User user : userDao.getAllUsers()) {
             System.out.println(user);
         }
-
         userDao.cleanUsersTable();
         System.out.println("Таблица пользователей очищена");
 
         userDao.dropUsersTable();
-        System.out.println("Таблица пользователей удалена");    }
+        System.out.println("Таблица пользователей удалена");
+    }
 }
