@@ -8,11 +8,13 @@ public class Util {
     private static String dbURL = "jdbc:mysql://localhost:3306/my_db";
     private static String dbUsername = "root";
     private static String dbPassword = "root";
+    private static Connection connection = null;
 
     public static Connection getConnect() {
-        Connection connection = null;
         try {
-            connection = DriverManager.getConnection(dbURL, dbUsername, dbPassword);
+            if (connection == null || connection.isClosed()) {
+                connection = DriverManager.getConnection(dbURL, dbUsername, dbPassword);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -21,7 +23,7 @@ public class Util {
 
     public static void closeConnect(Connection connection) {
         try {
-            if (connection != null) {
+            if (connection != null && !connection.isClosed()) {
                 connection.close();
             }
         } catch (SQLException e) {
